@@ -2,6 +2,8 @@ const React = require('react');
 
 //Custom Components
 const Keyboard = require('./keyboard');
+const Hangman = require('./hangman');
+const Word = require('./word');
 
 
 const App = React.createClass({
@@ -45,9 +47,8 @@ const App = React.createClass({
 
     return(
       <div>
-        <div className="panel">
-          <h1>{`${attempts}/${totalAttempts}`}</h1>
-        </div>
+        <Hangman />
+        <Word attempts={attempts} totalAttempts={totalAttempts}/>
         <Keyboard handleClickKey={this.handleClickKey} />
       </div>
     )
