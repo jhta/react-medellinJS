@@ -1,0 +1,40 @@
+{
+  "name": "react-example",
+  "version": "1.0.0",
+  "main": "main.js",
+  "description": "React example",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jhta/react-medellinJS.git"
+  },
+  "author": "jeisonhs93@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jhta/react-medellinJS/issues"
+  },
+  "homepage": "https://github.com/jhta/react-medellinJS#readme",
+  "devDependencies": {
+    "browserify": "^10.2.0",
+    "gulp": "^3.8.11",
+    "gulp-concat": "^2.5.2",
+    "gulp-htmlmin": "^1.1.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.0.1",
+    "gulp-strip-debug": "^1.0.2",
+    "gulp-stylus": "^2.0.1",
+    "gulp-uglify": "^1.2.0",
+    "gulp-webserver": "^0.9.1",
+    "nib": "^1.1.0"
+  },
+  "dependencies": {
+    "6to5ify": "^4.1.1",
+    "react": "^0.13.3",
+    "react-tap-event-plugin": "^0.1.6",
+    "reactify": "^1.1.1",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.2.1"
+  }
+}
