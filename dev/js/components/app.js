@@ -6,15 +6,14 @@ const Keyboard = require('./keyboard');
 
 const App = React.createClass({
 
-  handleClickKey(e){
-    e.preventDefault();
-
+  handleClickKey(key){
+    alert(key);
   },
 
   render(){
     return(
       <div>
-        <Keyboard />
+        <Keyboard handleClickKey={this.handleClickKey} />
       </div>
     )
   }
