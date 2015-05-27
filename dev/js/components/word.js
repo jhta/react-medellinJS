@@ -1,6 +1,11 @@
 const React = require("react");
 
 const Word = React.createClass({
+
+    isCorrectLetter(letter){
+      return this.props.correctLetters.indexOf(letter) > -1;
+    },
+
     render() {
     let chars = this.props.selectedWord.split('');
     return (<div className="panel word">
@@ -9,9 +14,9 @@ const Word = React.createClass({
                 return (
                     <button className="button" key={index} disabled={true}>
                         {
-                            this.props.correctLetters.indexOf(letter) > -1
+                            this.isCorrectLetter(letter)
                                 ? letter
-                                :null
+                                :"*"
                         }
                     </button>
                 )

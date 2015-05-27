@@ -1,5 +1,7 @@
 const React = require('react');
 
+const Words = require('../words');
+
 //Custom Components
 const Keyboard = require('./keyboard');
 const Hangman = require('./hangman');
@@ -10,7 +12,8 @@ const GameEnding = require('./gameEnding');
 const App = React.createClass({
 
   getInit(){
-    this.selectWord = 'sol';
+    console.log(Words[0]);
+    this.selectWord = Words[Math.floor(Math.random()*Words.length)].word;
     return {
       correctLetters: [],
       attempts: 0,
@@ -43,9 +46,11 @@ const App = React.createClass({
         incorrectLetters.push(key);
       this.setState({
         attempts: this.state.attempts + 1,
-          incorrectLetters: incorrectLetters
+        incorrectLetters: incorrectLetters
       });
     }
+
+
   },
 
   containsLetter(letter){
@@ -57,13 +62,18 @@ const App = React.createClass({
     let totalAttempts = this.state.totalAttempts;
     let correctLetters = this.state.correctLetters;
     let incorrectLetters = this.state.incorrectLetters;
-      let youLose = attempts == totalAttempts;
-      let youWin = false;
+    let youLose = attempts == totalAttempts;
+    let youWin = false;
     return(
+
       <div>
+        <Word
+          selectedWord={this.selectWord}
+          attempts={attempts}
+          correctLetters={correctLetters}
+          totalAttempts={totalAttempts}
+        />
         <Hangman attempts={attempts}/>
-        <Word selectedWord={this.selectWord} attempts={attempts}
-              correctLetters={correctLetters} totalAttempts={totalAttempts}/>
 
           {
               youLose || youWin
