@@ -10,11 +10,15 @@ const Keyboard = React.createClass({
       <div className="keyboard panel">
         {
           alphabet.map((letter, index)=>{
+              let state = this.props.incorrectLetters.indexOf(letter) > -1
+                  ? 'wrong' : this.props.correctLetters.indexOf(letter) > -1
+                  ? 'ok': null;
             return (
               <Keyboard.Key
                 handleClickKey={this.props.handleClickKey}
                 letter={letter}
-                key={index}/>
+                key={index}
+                  state={state}/>
               )
           })
         }
@@ -26,18 +30,19 @@ const Keyboard = React.createClass({
 Keyboard.Key = React.createClass({
 
   handleClick(e){
-      console.log("WTF");
       e.preventDefault();
       this.props.handleClickKey(this.props.letter);
   },
 
   render(){
+      let className = 'button keyboard-key' + (this.props.state === 'ok' ? ' ok' : '');
     return(
-      <div
-        className="button keyboard-key"
+      <button
+          disabled={this.props.state === 'wrong'}
+        className={className}
         onClick={this.handleClick}>
         {this.props.letter}
-      </div>
+      </button>
     )
   }
 });

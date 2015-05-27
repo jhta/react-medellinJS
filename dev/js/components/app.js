@@ -4,14 +4,18 @@ const React = require('react');
 const Keyboard = require('./keyboard');
 const Hangman = require('./hangman');
 const Word = require('./word');
+const GameEnding = require('./gameEnding');
 
 
 const App = React.createClass({
 
   getInit(){
+    this.selectWord = 'sol';
     return {
+      correctLetters: [],
       attempts: 0,
-      totalAttempts: 5
+      totalAttempts: 7,
+      incorrectLetters: []
     }
   },
 
@@ -28,28 +32,46 @@ const App = React.createClass({
 
   handleClickKey(key){
     //alert(key);
-    let attempts = this.containsLetter(key)? this.state.attempts : this.state.attempts+1;
-    this.setState({
-      attempts: attempts,
-      totalAttempts: 5
-    })
-
-    this.compareValues();
+    if(this.containsLetter(key)){
+      var correctLetters = this.state.correctLetters;
+      correctLetters.push(key);
+      this.setState({
+        correctLetters: correctLetters
+      });
+    } else {
+        var incorrectLetters = this.state.incorrectLetters;
+        incorrectLetters.push(key);
+      this.setState({
+        attempts: this.state.attempts + 1,
+          incorrectLetters: incorrectLetters
+      });
+    }
   },
 
   containsLetter(letter){
-    return letter == "a";
+    return this.selectWord.indexOf(letter) > -1;
   },
 
   render(){
     let attempts = this.state.attempts;
     let totalAttempts = this.state.totalAttempts;
-
+    let correctLetters = this.state.correctLetters;
+    let incorrectLetters = this.state.incorrectLetters;
+      let youLose = attempts == totalAttempts;
+      let youWin = false;
     return(
       <div>
-        <Hangman />
-        <Word attempts={attempts} totalAttempts={totalAttempts}/>
-        <Keyboard handleClickKey={this.handleClickKey} />
+        <Hangman attempts={attempts}/>
+        <Word selectedWord={this.selectWord} attempts={attempts}
+              correctLetters={correctLetters} totalAttempts={totalAttempts}/>
+
+          {
+              youLose || youWin
+                  ? <GameEnding youWin={youWin}/>
+                  : <Keyboard handleClickKey={this.handleClickKey}
+                              correctLetters={correctLetters}
+                              incorrectLetters={incorrectLetters}/>
+          }
       </div>
     )
   }
